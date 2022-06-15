@@ -1,8 +1,7 @@
 import { CellCoordinate, Direction, IAPIReturn, IBindingsInfo, IDirectionToVector, makePossibleCoordinate, OppositeDirectionDictionaryType, possibleAPIMethodType } from "./types";
-import { gridSize, originSite } from "../config";
+import { gridSize } from "../config";
 import {
     possibleDirectionVector, } from "./types";
-import axios from "axios";
 
 export function randomizeFrom1ToN (N : number) {
     return Math.floor(Math.random() * N) + 1
@@ -47,50 +46,6 @@ export function fetchItemFromLocalStorage (key : string){
     }
 }
 
-const argumentToGetCookies = {headers: { 
-    'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": `${originSite}`,
- }, withCredentials: true,}
-
-// const argumentToGetCookies = {}
-
-
-export async function errorHandlingWrapper (url : string, bodyData : any = {}, method : possibleAPIMethodType) {
-    try {
-        const response = await axios({...{method, url, data : bodyData }, ...argumentToGetCookies ?? {}});
-        console.log(response);
-        return {
-            statusCode : response.status,
-            isError : false,
-            message : response.data?.message,
-            error : null,
-            retrievedData : response.data?.sentData
-        } as IAPIReturn;
-
-    } catch (error) {
-        console.log(error);
-        return {
-            statusCode : error.response.status,
-            isError : true,
-            message : error.response.data?.message,
-            error : error,
-            retrievedData : null
-        } as IAPIReturn;
-    }
-}
-
-export async function fetchDataRetry (functionToCall : () => Promise<IAPIReturn>, timesFunctionIsCalled : number, limitOfCalling : number) : Promise<IAPIReturn>{
-    const response = await functionToCall();
-    if (response.statusCode < 500) {
-        return response;
-    }
-
-    if (timesFunctionIsCalled < limitOfCalling) {
-        return fetchDataRetry(functionToCall, timesFunctionIsCalled + 1, limitOfCalling)
-    }
-
-    return response;
-}   
 
 export function updateBindingFirstElement(newKey : string, changedDirection : Direction, previousBinding : IBindingsInfo){
     Object.keys(previousBinding).forEach((direction : Direction) => {

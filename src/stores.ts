@@ -1,6 +1,5 @@
 import { readable, writable } from "svelte/store";
 import {defaultBinding, initialLength, initialRefreshTime, numberOfFruitSpawned } from "./config";
-import { getSavedGame, updateSavedGame } from "./utilities/api";
 import type { Direction, IAchievementInfo, IBindingsInfo, InitialBindingType, ISavedGameInfo, IUserData, IUserDataStore, possibleGameStateType, UpdateAchievementPayload, UpdateSavedGamePayload } from "./utilities/types";
 import { allCoordinateList, fetchItemFromLocalStorage, updateBindingFirstElement } from "./utilities/utilities";
 import { randomCoordinate, randomDirection, randomUniqueCoordinateGenerator, wholeSnakeCoordinateListInitialGenerator } from "./utilities/utilitiesCoreGame";
@@ -9,10 +8,6 @@ export const deviceWidth = readable(screen.width);
 
 function createSavedGame () {
     const {subscribe, set, update} = writable(fetchSavedGameFromLocalStorage());
-
-    async function getServerData () {
-        return getSavedGame();
-    }
 
     function fetchSavedGameFromLocalStorage() {
     const candidateSavedGame = fetchItemFromLocalStorage("savedGame");
@@ -53,18 +48,11 @@ function createSavedGame () {
             return newObject;
         })
     }
-
-    function setDataFromServer (savedGameFromServer : ISavedGameInfo) {
-        set({...savedGameFromServer, currentRefreshTime : savedGameFromServer.currentRefreshTime ?? initialRefreshTime,
-        })
-    }
-
     async function reset (isLoggedIn : boolean) {
         const newSavedGame = createNewSavedGame();
         if (!isLoggedIn) {
             localStorage.removeItem("savedGame");
         } else {
-            updateSavedGame(newSavedGame);
         }
         set(newSavedGame);
     }
@@ -78,8 +66,6 @@ function createSavedGame () {
         reset,
         set,
         removeFromLocalStorage,
-        getServerData,
-        setDataFromServer,
         updatePartOfSavedGame,
         fetchSavedGameFromLocalStorage
     }
@@ -94,10 +80,6 @@ function createAchievement () {
         return (candidateAchievement ?? createNewAchievement(
             (candidateAchievement === undefined ? 0 : (candidateSavedGame as ISavedGameInfo).wholeSnakeCoordinateList.length)
         )) as IAchievementInfo
-    }
-
-    async function getServerData () {
-        return getSavedGame();
     }
 
     function createNewAchievement (length = 0) {
@@ -140,7 +122,6 @@ function createAchievement () {
         set,
         fetchAchievementFromLocalStorage,
         removeFromLocalStorage,
-        getServerData,
         setDataFromServer,
         updatePartOfAchievement
     }
@@ -152,10 +133,6 @@ function createBindings () {
     function fetchBindingsFromLocalStorage() {
         const candidateBindings = fetchItemFromLocalStorage("bindings");
         return (candidateBindings ?? defaultBinding) as IBindingsInfo
-    }
-
-    async function getServerData () {
-        return getSavedGame();
     }
 
     function changeFirstElementPartOfBindings (newKey : string, changedDirection : Direction, isLoggedIn : boolean) {
@@ -187,7 +164,6 @@ function createBindings () {
         set,
         fetchBindingsFromLocalStorage,
         removeFromLocalStorage,
-        getServerData,
         setDataFromServer,
         changeFirstElementPartOfBindings
     }
@@ -204,8 +180,4 @@ export const gameIsOver = writable(false);
 export const modalOpen = writable(false);
 export const initialBindingModalJustOpened = writable(null as InitialBindingType);
 
-export const userData = writable({username : "Anonymous", id : undefined} as (IUserDataStore | IUserData))
 export const bindings = createBindings();
-
-export const savedGameStale = writable(false);
-export const achievementStale = writable(false);

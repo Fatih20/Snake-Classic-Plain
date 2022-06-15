@@ -5,16 +5,13 @@
     gameState,
     isLoggedIn,
     modalOpen,
-    userData,
   } from "../stores";
 
-  import { logout } from "../utilities/api";
   import type {
     Direction,
     DirectionBeingChangedType,
   } from "../utilities/types";
   import { fly } from "svelte/transition";
-  import { onDestroy } from "svelte";
 
   let directionBeingChanged = "" as DirectionBeingChangedType;
 
@@ -45,28 +42,10 @@
   function typecastToDirection(direction: string) {
     return direction as Direction;
   }
-
-  async function handleLogout() {
-    const response = await logout();
-
-    if (response.statusCode < 400) {
-      // isLoggedIn.set(false);
-      window.location.reload();
-    }
-    return;
-  }
-
-  async function handleLogButton() {
-    if ($isLoggedIn) {
-      await handleLogout();
-    } else {
-      gameState.set("login");
-    }
-  }
 </script>
 
 <main on:click={(e) => e.stopPropagation()}>
-  <h2 class="title">Enjoy the game, {$userData.username}!</h2>
+  <!-- <h2 class="title">Enjoy the game, {$userData.username}!</h2> -->
   {#if $deviceWidth >= 1000}
     <div class="key-binding-container">
       <h3 class="section-title">Key Binding</h3>
@@ -95,9 +74,6 @@
       {/if}
     </div>
   {/if}
-  <button class="log-button" on:click={handleLogButton}
-    >{$isLoggedIn ? "Log Out" : "Log In"}</button
-  >
 </main>
 
 <svelte:window on:keydown={handleKeydown} />

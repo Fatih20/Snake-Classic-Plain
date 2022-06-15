@@ -5,16 +5,7 @@
     mainMenuTransitionDuration,
     loadPageTransitionDuration,
   } from "../config";
-  import {
-    achievement,
-    bindings,
-    firstStart,
-    gameState,
-    isLoggedIn,
-    savedGame,
-    userData,
-  } from "../stores";
-  import { logout } from "../utilities/api";
+  import { gameState } from "../stores";
 
   const dispatch = createEventDispatcher();
 
@@ -44,40 +35,12 @@
       <button
         class="option-container"
         on:click={async () => {
-          logout();
-          isLoggedIn.set(false);
-          savedGame.set(savedGame.fetchSavedGameFromLocalStorage());
-          achievement.set(achievement.fetchAchievementFromLocalStorage());
-          bindings.set(bindings.fetchBindingsFromLocalStorage());
           gameState.set("playing");
         }}
       >
         <h3 class="start-button-title">Play as a Guest</h3>
         <!-- <p>Save your game and high score on this device</p> -->
       </button>
-      {#if !$isLoggedIn}
-        <button
-          class="option-container"
-          on:click={() => {
-            gameState.set("login");
-          }}
-        >
-          <h3 class="start-button-title">Login</h3>
-          <!-- <p>
-            Save your game and high score to your account (or create new one!)
-          </p> -->
-        </button>
-      {:else}
-        <button
-          class="option-container"
-          on:click={() => {
-            gameState.set("playing");
-          }}
-        >
-          <h3 class="start-button-title">Play as {$userData.username}</h3>
-          <!-- <p>Your save game and high score will be saved to this account</p> -->
-        </button>
-      {/if}
     </div>
   </div>
 </main>

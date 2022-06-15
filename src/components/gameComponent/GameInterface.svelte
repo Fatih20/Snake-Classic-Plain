@@ -1,10 +1,5 @@
 <script lang="ts">
-  import {
-    achievement,
-    achievementStale,
-    isLoggedIn,
-    savedGame,
-  } from "../../stores";
+  import { achievement, isLoggedIn, savedGame } from "../../stores";
 
   let length = $savedGame.wholeSnakeCoordinateList?.length ?? 0;
   $: length = $savedGame.wholeSnakeCoordinateList?.length ?? 0;
@@ -14,7 +9,6 @@
 
   function highScoreChecker(score: number) {
     if (score >= $achievement.highScore) {
-      achievementStale.set(true);
       achievement.updatePartOfAchievement(
         {
           updatedValue: "highScore",
@@ -27,7 +21,6 @@
 
   function longestLengthChecker(length: number) {
     if (length >= $achievement.longestLength) {
-      achievementStale.set(true);
       achievement.updatePartOfAchievement(
         {
           updatedValue: "longestLength",

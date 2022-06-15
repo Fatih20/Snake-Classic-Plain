@@ -2,14 +2,12 @@
   import Saving from "./Saving.svelte";
   import {
     delayUntilGameStarts,
-    durationOfSavingConfirmationMessage,
     gridSize,
     numberOfFruitSpawned,
     numberOfTailAddedAfterEating,
     refreshTimeDecrementEveryTurn,
     refreshTimeLowerBound,
     refreshTimeMultiplierEveryTurn,
-    saveInterval,
     scoresAfterEveryFruit,
     turnIntervalBetweenFruitSpawn,
   } from "../../config";
@@ -23,9 +21,6 @@
     gameIsOver,
     savedGame,
     firstStart,
-    savedGameStale,
-    achievementStale,
-    achievement,
     isLoggedIn,
     bindings,
   } from "../../stores";
@@ -39,7 +34,6 @@
     randomUniqueCoordinateGenerator,
     wholeSnakeCoordinateListUpdater,
   } from "../../utilities/utilitiesCoreGame";
-  import { updateAchievement, updateSavedGame } from "../../utilities/api";
 
   let mainEventLoop: NodeJS.Timer;
   let dispatch = createEventDispatcher();
@@ -153,8 +147,6 @@
       $isLoggedIn
     );
 
-    savedGameStale.set(true);
-
     if (allFruitEaten) {
       nthTurnReference += 1;
     }
@@ -188,54 +180,6 @@
     } else {
       clearTimeout(mainEventLoop);
     }
-  }
-
-  if ($isLoggedIn) {
-    setInterval(savingToTheServer, saveInterval);
-  }
-
-  async function savingToTheServer() {
-    if (isSaving) {
-      return;
-    }
-
-    attemptToSaveCompleted = false;
-    errorWhenSaving = false;
-
-    async function revertIsSaving() {
-      setTimeout(() => {
-        isSaving = false;
-      }, durationOfSavingConfirmationMessage);
-    }
-
-    if ($savedGameStale) {
-      isSaving = true;
-      savedGameStale.set(false);
-      const response = await updateSavedGame($savedGame);
-      attemptToSaveCompleted = true;
-      if (response.statusCode >= 400) {
-        console.log("Sending Saved Game Should Be Error");
-        savedGameStale.set(true);
-        errorWhenSaving = true;
-        revertIsSaving();
-        return;
-      }
-    }
-
-    if ($achievementStale) {
-      isSaving = true;
-      achievementStale.set(false);
-      const response = await updateAchievement($achievement);
-      attemptToSaveCompleted = true;
-      if (response.statusCode >= 400) {
-        console.log("Sending Saved Game Should Be Error");
-        achievementStale.set(true);
-        errorWhenSaving = true;
-        revertIsSaving();
-        return;
-      }
-    }
-    revertIsSaving();
   }
 
   $: {

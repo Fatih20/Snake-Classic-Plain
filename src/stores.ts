@@ -173,7 +173,7 @@ export const savedGame = createSavedGame();
 export const achievement = createAchievement();
 
 export const firstStart = writable(fetchItemFromLocalStorage("savedGame") === undefined);
-export const gameState = writable("loadingData" as possibleGameStateType);
+export const gameState = writable("startPage" as possibleGameStateType);
 export const isLoggedIn = writable(false);
 export const gameIsPaused = writable(fetchItemFromLocalStorage("savedGame") !== undefined);
 export const gameIsOver = writable(false);

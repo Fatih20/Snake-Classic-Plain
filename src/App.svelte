@@ -12,7 +12,6 @@
     gameIsPaused,
     isLoggedIn,
     achievement,
-    userData,
     modalOpen,
     initialBindingModalJustOpened,
     bindings,
@@ -22,50 +21,30 @@
   import type { ISavedGameInfo, IUserData } from "./utilities/types";
   import ErrorOnInitialLoad from "./components/ErrorOnInitialLoad.svelte";
   import AccountModal from "./components/AccountModal.svelte";
-  import { updateBindings } from "./utilities/api";
 
   let modalJustError = false;
-  onMount(async () => {
-    console.log(new Date().getMilliseconds());
-    const response = await savedGame.getServerData();
-    console.log(response);
-    const { statusCode, retrievedData } = response;
-    console.log(new Date().getMilliseconds());
-    if (statusCode >= 500) {
-      gameState.set("serverErrorOnInitialLoad");
-      return;
-    }
-
-    if (statusCode < 400) {
-      console.log(retrievedData);
-      savedGame.setDataFromServer(retrievedData.savedGame as ISavedGameInfo);
-      achievement.setDataFromServer(retrievedData.achievement);
-      userData.set(retrievedData.userData as IUserData);
-      isLoggedIn.set(true);
-    }
-    gameState.set("startPage");
-  });
 
   onMount(() => {
     initialBindingModalJustOpened.set($bindings);
   });
 
   async function handleCloseModal() {
-    if (
-      JSON.stringify($initialBindingModalJustOpened) !==
-      JSON.stringify($bindings)
-    ) {
-      const response = await updateBindings($bindings);
-      if (response.statusCode < 400) {
-        modalJustError = false;
-        modalOpen.set(false);
-        return;
-      }
-      modalJustError = true;
-    } else {
-      modalJustError = false;
-      modalOpen.set(false);
-    }
+    // if (
+    //   JSON.stringify($initialBindingModalJustOpened) !==
+    //   JSON.stringify($bindings)
+    // ) {
+    //   const response = await updateBindings($bindings);
+    //   if (response.statusCode < 400) {
+    //     modalJustError = false;
+    //     modalOpen.set(false);
+    //     return;
+    //   }
+    //   modalJustError = true;
+    // } else {
+    //   modalJustError = false;
+    //   modalOpen.set(false);
+    // }
+    modalOpen.set(false);
   }
 
   async function resetCoreGame() {

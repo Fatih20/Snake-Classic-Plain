@@ -3,7 +3,6 @@
   import Game from "./components/Game.svelte";
   import Footer from "./components/Footer.svelte";
   import StartPage from "./components/StartPage.svelte";
-  import InitialLoadPage from "./components/InitialLoadPage.svelte";
   import { fade } from "svelte/transition";
   import {
     gameIsOver,
@@ -16,10 +15,8 @@
     initialBindingModalJustOpened,
     bindings,
   } from "./stores";
-  import Login from "./components/Login.svelte";
   import { onMount } from "svelte";
   import type { ISavedGameInfo, IUserData } from "./utilities/types";
-  import ErrorOnInitialLoad from "./components/ErrorOnInitialLoad.svelte";
   import AccountModal from "./components/AccountModal.svelte";
 
   let modalJustError = false;
@@ -61,13 +58,9 @@
 </script>
 
 <main>
-  {#if $gameState === "loadingData"}
-    <InitialLoadPage />
-  {:else if $gameState === "startPage"}
+  {#if $gameState === "startPage"}
     <!-- {#if $gameState === "startPage"} -->
     <StartPage />
-  {:else if $gameState === "serverErrorOnInitialLoad"}
-    <ErrorOnInitialLoad />
   {:else}
     <div class="main-app-container">
       {#if $modalOpen}
@@ -90,15 +83,7 @@
         </div>
       {/if}
       <Header on:resetGame={resetCoreGame} />
-      {#if $gameState === "playing"}
-        <Game {resetCoreGame} />
-      {/if}
-      {#if $gameState === "login" || $gameState === "signIn"}
-        <div class="spacer" />
-        <Login />
-        <!-- <div class="spacer" /> -->
-        <div class="spacer" />
-      {/if}
+      <Game {resetCoreGame} />
       <Footer />
     </div>
   {/if}

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Saving from "./Saving.svelte";
   import {
     delayUntilGameStarts,
     gridSize,
@@ -285,7 +284,6 @@
       />
     {/each}
   </div>
-  <Saving {attemptToSaveCompleted} {isSaving} {errorWhenSaving} />
   <div class="spacer" />
 </main>
 

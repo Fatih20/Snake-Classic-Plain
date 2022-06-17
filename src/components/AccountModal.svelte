@@ -17,8 +17,6 @@
       return;
     }
 
-    console.log(e);
-
     const { key: keyPressed } = e;
 
     if (keyPressed === "Escape") {
@@ -42,6 +40,7 @@
   on:click={(e) => e.stopPropagation()}
   in:fly={{ duration: modalTransitionDuration, y: -1 * modalTransitionOffset }}
   out:fly={{ duration: modalTransitionDuration, y: -1 * modalTransitionOffset }}
+  class:no-settings-main={$deviceWidth < 1000}
 >
   <!-- <h2 class="title">Enjoy the game, {$userData.username}!</h2> -->
   {#if $deviceWidth >= 1000}
@@ -71,6 +70,8 @@
         </p>
       {/if}
     </div>
+  {:else}
+    <h3 class="section-title no-settings-text">No settings available</h3>
   {/if}
 </main>
 
@@ -91,6 +92,11 @@
     padding: 0.5em 1em;
     width: 100%;
     max-width: 300px;
+    min-height: 100px;
+  }
+
+  .no-settings-main {
+    justify-content: center;
   }
 
   .title {
@@ -136,6 +142,10 @@
   .section-title {
     align-self: flex-start;
     font-size: 1em;
+  }
+
+  .no-settings-text {
+    align-self: center;
   }
 
   .control-button {

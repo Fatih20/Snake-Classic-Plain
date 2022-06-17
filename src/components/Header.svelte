@@ -79,7 +79,7 @@
         initialBindingModalJustOpened.set($bindings);
       }}
     >
-      <i class="fa-solid fa-user" />
+      <i class="fa-solid fa-gear" />
     </button>
   </div>
 </main>

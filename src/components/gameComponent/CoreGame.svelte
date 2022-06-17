@@ -278,6 +278,7 @@
     align-items: center;
     background-color: rgba(var(--primary-color));
     bottom: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -294,6 +295,7 @@
   }
 
   .game-over-container {
+    padding: 0.25em;
     z-index: 1000;
   }
 

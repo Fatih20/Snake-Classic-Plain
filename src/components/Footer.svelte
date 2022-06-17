@@ -2,9 +2,8 @@
 </script>
 
 <main>
-  <p>Copyright &copy; Fatih Nararya R. I.</p>
-  <p>Created with ExpressJS and Svelte</p>
-  <p>Some Rights Reserved</p>
+  <p>Made with Svelte</p>
+  <p>&copy; 2022 Fatih Nararya R. I.</p>
 </main>
 
 <style>

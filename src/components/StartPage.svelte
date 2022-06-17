@@ -38,7 +38,7 @@
           gameState.set("playing");
         }}
       >
-        <h3 class="start-button-title">Play as a Guest</h3>
+        <h3 class="start-button-title">Play</h3>
         <!-- <p>Save your game and high score on this device</p> -->
       </button>
     </div>

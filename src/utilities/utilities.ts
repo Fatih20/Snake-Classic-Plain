@@ -1,4 +1,4 @@
-import { CellCoordinate, Direction, IAPIReturn, IBindingsInfo, IDirectionToVector, makePossibleCoordinate, OppositeDirectionDictionaryType, possibleAPIMethodType } from "./types";
+import { CellCoordinate, Direction, IBindingsInfo, IDirectionToVector, makePossibleCoordinate, OppositeDirectionDictionaryType } from "./types";
 import { gridSize } from "../config";
 import {
     possibleDirectionVector, } from "./types";

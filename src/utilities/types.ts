@@ -95,71 +95,9 @@ export type ISavedGameProperty = keyof ISavedGameInfo;
 
 const possibleGameState = [
   "startPage",
-  "playing",
-  "settings",
-  "login",
-  "signIn",
-  "loadingData",
-  "serverErrorOnInitialLoad"
+  "playing"
 ] as const;
 export type possibleGameStateType = typeof possibleGameState[number];
-
-export interface ILoginInput {
-  name : string,
-  password : string
-}
-
-export interface IRegisterInput {
-  name : string,
-  email : string,
-  password : string,
-  savedGameInfo : ISavedGameInfo,
-  achievement : IAchievementInfo,
-  bindings : IBindingsInfo,
-}
-
-export interface IResponseData {
-  message : string,
-  error? : any,
-}
-
-export type IAPIReturn<RetrievedDataType = any> = {
-  statusCode : number,
-  isError : boolean,
-  message : string,
-  error : any,
-  retrievedData : RetrievedDataType
-}
-
-const possibleAPIMethodList = ["post", "put", "get", "patch", "delete"] as const;
-export type possibleAPIMethodType = typeof possibleAPIMethodList[number];
-
-export interface IGetServerDataReturn {
-  success : boolean,
-  errorDueToServer : boolean,
-}
-
-export interface IUserData {
-  username : string,
-  id : number,
-}
-
-export interface IUserDataStore {
-  username : string | undefined,
-  id : number | undefined
-}
-
-export interface ILoginAndRegisterRetrievedData {
-  userData : IUserData
-}
-
-export interface IGetSavedGameRetrievedData extends ILoginAndRegisterRetrievedData{
-  savedGame : ISavedGameInfo,
-  achievement : IAchievementInfo,
-  bindings : IBindingsInfo,
-}
-
-export type errorHandlingWrapperType = (url: string, bodyData: any, method: possibleAPIMethodType) => Promise<IAPIReturn>
 
 export interface IUpdateCurrentRefreshTimePayload {
   updatedValue : "currentRefreshTime",

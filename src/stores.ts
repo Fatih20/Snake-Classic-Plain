@@ -1,6 +1,6 @@
 import { readable, writable } from "svelte/store";
 import {defaultBinding, initialLength, initialRefreshTime, numberOfFruitSpawned } from "./config";
-import type { Direction, IAchievementInfo, IBindingsInfo, InitialBindingType, ISavedGameInfo, IUserData, IUserDataStore, possibleGameStateType, UpdateAchievementPayload, UpdateSavedGamePayload } from "./utilities/types";
+import type { Direction, IAchievementInfo, IBindingsInfo, InitialBindingType, ISavedGameInfo, possibleGameStateType, UpdateAchievementPayload, UpdateSavedGamePayload } from "./utilities/types";
 import { allCoordinateList, fetchItemFromLocalStorage, updateBindingFirstElement } from "./utilities/utilities";
 import { randomCoordinate, randomDirection, randomUniqueCoordinateGenerator, wholeSnakeCoordinateListInitialGenerator } from "./utilities/utilitiesCoreGame";
 

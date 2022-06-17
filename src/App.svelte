@@ -16,7 +16,7 @@
     bindings,
   } from "./stores";
   import { onMount } from "svelte";
-  import type { ISavedGameInfo, IUserData } from "./utilities/types";
+  import type { ISavedGameInfo } from "./utilities/types";
   import AccountModal from "./components/AccountModal.svelte";
 
   let modalJustError = false;

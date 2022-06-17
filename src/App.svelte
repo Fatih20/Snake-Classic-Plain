@@ -21,8 +21,6 @@
     modalTransitionDuration,
   } from "./config";
 
-  let modalJustError = false;
-
   async function handleCloseModal() {
     modalOpen.set(false);
   }
@@ -63,12 +61,6 @@
         >
           <AccountModal />
           <div class="spacer" />
-          {#if modalJustError}
-            <p class="in-overlay-text modal-error-text">
-              Error sending your new binding to the server. Please try closing
-              the modal again.
-            </p>
-          {/if}
           <p
             class="in-overlay-text modal-closing-text"
             in:fly={{ duration: modalTransitionDuration, y: 250 }}

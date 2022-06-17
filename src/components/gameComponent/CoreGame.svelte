@@ -21,6 +21,7 @@
     savedGame,
     firstStart,
     bindings,
+    modalOpen,
   } from "../../stores";
 
   import { createEventDispatcher, onMount } from "svelte";
@@ -68,10 +69,10 @@
     const { key: keyPressed, code: keyCode } = e;
     const candidateDirection = keyToDirectionConverter(keyPressed, $bindings);
 
-    if (keyCode === "Space") {
-      gameIsPaused.update((previousGameIsPaused) => !previousGameIsPaused);
-      return;
-    }
+    // if (keyCode === "Space") {
+    //   gameIsPaused.update((previousGameIsPaused) => !previousGameIsPaused);
+    //   return;
+    // }
 
     if (candidateDirection === null) {
       return;
@@ -195,10 +196,17 @@
     }
   }
 
+  function handleKeyUp(e) {
+    const { code: keyCode } = e;
+    if (keyCode === "Space" && !$modalOpen) {
+      gameIsPaused.update((previousGameIsPaused) => !previousGameIsPaused);
+    }
+  }
+
   // $: console.log(cornerOfSnakeBodyList);
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={handleKeydown} on:keyup={handleKeyUp} />
 
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />

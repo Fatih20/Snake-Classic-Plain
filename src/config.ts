@@ -11,7 +11,6 @@ export const numberOfTailAddedAfterEating = 1;
 export const scoresAfterEveryFruit = 7;
 export const initialLength = 4;
 export const mainMenuTransitionDuration = 125;
-export const loadPageTransitionDuration = 500;
 export const modalTransitionDuration = 250;
 export const delayUntilGameStarts = 500 + mainMenuTransitionDuration;
 export const defaultBinding : IBindingsInfo = {Up : ["w", "ArrowUp"], Down : ["s", "ArrowDown"], Left : ["a", "ArrowLeft"], Right : ["d", "ArrowRight"]}

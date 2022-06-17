@@ -1,10 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { fade, fly } from "svelte/transition";
-  import {
-    mainMenuTransitionDuration,
-    loadPageTransitionDuration,
-  } from "../config";
+  import { fade } from "svelte/transition";
+  import { mainMenuTransitionDuration } from "../config";
   import { gameState } from "../stores";
 
   const dispatch = createEventDispatcher();

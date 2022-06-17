@@ -25,10 +25,10 @@
 </head>
 
 <main
-  in:fade={{ duration: mainMenuTransitionDuration }}
+  in:fade={{ duration: mainMenuTransitionDuration / 2 }}
   out:fade={{
-    delay: mainMenuTransitionDuration,
-    duration: mainMenuTransitionDuration,
+    delay: mainMenuTransitionDuration / 2,
+    duration: mainMenuTransitionDuration / 2,
   }}
 >
   <div id="content-container">

@@ -48,10 +48,10 @@
     <div
       class="main-app-container"
       in:fade={{
-        delay: mainMenuTransitionDuration,
-        duration: mainMenuTransitionDuration,
+        delay: mainMenuTransitionDuration / 2,
+        duration: mainMenuTransitionDuration / 2,
       }}
-      out:fade={{ duration: mainMenuTransitionDuration }}
+      out:fade={{ duration: mainMenuTransitionDuration / 2 }}
     >
       {#if $modalOpen}
         <div

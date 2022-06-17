@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import {
     mainMenuTransitionDuration,
     loadPageTransitionDuration,
@@ -27,7 +27,13 @@
   />
 </head>
 
-<main>
+<main
+  in:fade={{ duration: mainMenuTransitionDuration }}
+  out:fade={{
+    delay: mainMenuTransitionDuration,
+    duration: mainMenuTransitionDuration,
+  }}
+>
   <div id="content-container">
     <h1 id="title">Snake<br />Classic</h1>
     <!-- <div class="spacer" /> -->

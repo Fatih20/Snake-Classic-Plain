@@ -3,7 +3,7 @@
   import Game from "./components/Game.svelte";
   import Footer from "./components/Footer.svelte";
   import StartPage from "./components/StartPage.svelte";
-  import { fade } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import {
     gameIsOver,
     savedGame,
@@ -17,6 +17,7 @@
   import { onMount } from "svelte";
   import type { ISavedGameInfo } from "./utilities/types";
   import AccountModal from "./components/AccountModal.svelte";
+  import { mainMenuTransitionDuration } from "./config";
 
   let modalJustError = false;
 
@@ -46,7 +47,14 @@
     <!-- {#if $gameState === "startPage"} -->
     <StartPage />
   {:else}
-    <div class="main-app-container">
+    <div
+      class="main-app-container"
+      in:fade={{
+        delay: mainMenuTransitionDuration,
+        duration: mainMenuTransitionDuration,
+      }}
+      out:fade={{ duration: mainMenuTransitionDuration }}
+    >
       {#if $modalOpen}
         <div
           class="absolute-container"

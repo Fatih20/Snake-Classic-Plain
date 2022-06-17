@@ -11,7 +11,6 @@
     gameIsPaused,
     achievement,
     modalOpen,
-    initialBindingModalJustOpened,
     bindings,
   } from "./stores";
   import { onMount } from "svelte";
@@ -23,10 +22,6 @@
   } from "./config";
 
   let modalJustError = false;
-
-  onMount(() => {
-    initialBindingModalJustOpened.set($bindings);
-  });
 
   async function handleCloseModal() {
     modalOpen.set(false);

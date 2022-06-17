@@ -5,7 +5,6 @@
     gameIsOver,
     gameState,
     modalOpen,
-    initialBindingModalJustOpened,
     bindings,
   } from "../stores";
 
@@ -75,7 +74,6 @@
       on:click={() => {
         gameIsPaused.set(true);
         modalOpen.set(true);
-        initialBindingModalJustOpened.set($bindings);
       }}
     >
       <i

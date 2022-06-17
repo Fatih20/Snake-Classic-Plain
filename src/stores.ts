@@ -168,6 +168,5 @@ export const gameState = writable("startPage" as possibleGameStateType);
 export const gameIsPaused = writable(fetchItemFromLocalStorage("savedGame") !== undefined);
 export const gameIsOver = writable(false);
 export const modalOpen = writable(false);
-export const initialBindingModalJustOpened = writable(null as InitialBindingType);
 
 export const bindings = createBindings();

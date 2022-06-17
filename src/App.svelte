@@ -26,21 +26,6 @@
   });
 
   async function handleCloseModal() {
-    // if (
-    //   JSON.stringify($initialBindingModalJustOpened) !==
-    //   JSON.stringify($bindings)
-    // ) {
-    //   const response = await updateBindings($bindings);
-    //   if (response.statusCode < 400) {
-    //     modalJustError = false;
-    //     modalOpen.set(false);
-    //     return;
-    //   }
-    //   modalJustError = true;
-    // } else {
-    //   modalJustError = false;
-    //   modalOpen.set(false);
-    // }
     modalOpen.set(false);
   }
 

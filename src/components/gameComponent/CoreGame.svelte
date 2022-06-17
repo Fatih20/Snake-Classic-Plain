@@ -65,8 +65,14 @@
   }
 
   function handleKeydown(e) {
-    const { key: keyPressed } = e;
+    const { key: keyPressed, code: keyCode } = e;
     const candidateDirection = keyToDirectionConverter(keyPressed, $bindings);
+
+    if (keyCode === "Space") {
+      gameIsPaused.update((previousGameIsPaused) => !previousGameIsPaused);
+      return;
+    }
+
     if (candidateDirection === null) {
       return;
     }

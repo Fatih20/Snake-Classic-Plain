@@ -19,6 +19,7 @@
   import {
     mainMenuTransitionDuration,
     modalTransitionDuration,
+    modalTransitionOffset,
   } from "./config";
 
   async function handleCloseModal() {
@@ -63,8 +64,14 @@
           <div class="spacer" />
           <p
             class="in-overlay-text modal-closing-text"
-            in:fly={{ duration: modalTransitionDuration, y: 250 }}
-            out:fly={{ duration: modalTransitionDuration, y: 250 }}
+            in:fly={{
+              duration: modalTransitionDuration,
+              y: modalTransitionOffset,
+            }}
+            out:fly={{
+              duration: modalTransitionDuration,
+              y: modalTransitionDuration,
+            }}
           >
             Click anywhere but the modal to close it
           </p>

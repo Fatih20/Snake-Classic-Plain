@@ -62,6 +62,7 @@
     <h1
       id="title"
       on:click={() => {
+        gameIsPaused.set(true);
         gameState.set("startPage");
       }}
     >

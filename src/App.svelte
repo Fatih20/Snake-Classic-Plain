@@ -17,7 +17,10 @@
   import { onMount } from "svelte";
   import type { ISavedGameInfo } from "./utilities/types";
   import AccountModal from "./components/AccountModal.svelte";
-  import { mainMenuTransitionDuration } from "./config";
+  import {
+    mainMenuTransitionDuration,
+    modalTransitionDuration,
+  } from "./config";
 
   let modalJustError = false;
 
@@ -37,7 +40,9 @@
 
   $: {
     if ($gameState !== "playing") {
-      modalOpen.set(false);
+      setTimeout(() => {
+        modalOpen.set(false);
+      }, modalTransitionDuration);
     }
   }
 </script>
@@ -69,7 +74,11 @@
               the modal again.
             </p>
           {/if}
-          <p class="in-overlay-text modal-closing-text">
+          <p
+            class="in-overlay-text modal-closing-text"
+            in:fly={{ duration: modalTransitionDuration, y: 250 }}
+            out:fly={{ duration: modalTransitionDuration, y: 250 }}
+          >
             Click anywhere but the modal to close it
           </p>
         </div>
@@ -91,8 +100,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-between-parts);
-    justify-content: center;
     height: 100vh;
+    justify-content: center;
+    overflow-y: hidden;
     width: 100%;
     /* border: solid 1px white; */
   }
@@ -115,26 +125,26 @@
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
     left: 0;
-    opacity: 0;
+    /* opacity: 0; */
     right: 0;
     position: absolute;
     padding: 2em;
     top: 0;
     transition: all 0.25s ease-in-out;
-    visibility: hidden;
+    /* visibility: hidden; */
     z-index: 1000;
   }
 
   .absolute-container-visible {
     /* background-color: rgba(0, 0, 0, 0.5); */
     display: flex;
-    opacity: 1;
+    /* opacity: 1; */
     pointer-events: all;
-    visibility: visible;
+    /* visibility: visible; */
   }
 
   .in-overlay-text {

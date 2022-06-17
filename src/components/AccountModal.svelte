@@ -6,6 +6,7 @@
     DirectionBeingChangedType,
   } from "../utilities/types";
   import { fly } from "svelte/transition";
+  import { modalTransitionDuration } from "../config";
 
   let directionBeingChanged = "" as DirectionBeingChangedType;
 
@@ -37,7 +38,11 @@
   }
 </script>
 
-<main on:click={(e) => e.stopPropagation()}>
+<main
+  on:click={(e) => e.stopPropagation()}
+  in:fly={{ duration: modalTransitionDuration, y: -250 }}
+  out:fly={{ duration: modalTransitionDuration, y: -250 }}
+>
   <!-- <h2 class="title">Enjoy the game, {$userData.username}!</h2> -->
   {#if $deviceWidth >= 1000}
     <div class="key-binding-container">

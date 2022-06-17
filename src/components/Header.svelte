@@ -78,7 +78,10 @@
         initialBindingModalJustOpened.set($bindings);
       }}
     >
-      <i class="fa-solid fa-gear" />
+      <i
+        class="fa-solid fa-gear gear-icon"
+        class:gear-icon-opened={$modalOpen}
+      />
     </button>
   </div>
 </main>
@@ -117,6 +120,14 @@
     font-weight: 400;
     user-select: none;
     /* border: solid 1px white; */
+  }
+
+  .gear-icon {
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .gear-icon-opened {
+    transform: rotate(90deg);
   }
 
   .header-button {

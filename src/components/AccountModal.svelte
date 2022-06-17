@@ -33,8 +33,7 @@
 
     bindings.changeFirstElementPartOfBindings(
       keyPressed,
-      directionBeingChanged,
-      $isLoggedIn
+      directionBeingChanged
     );
     directionBeingChanged = "";
   }

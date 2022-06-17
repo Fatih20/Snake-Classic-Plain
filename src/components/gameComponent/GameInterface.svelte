@@ -9,25 +9,19 @@
 
   function highScoreChecker(score: number) {
     if (score >= $achievement.highScore) {
-      achievement.updatePartOfAchievement(
-        {
-          updatedValue: "highScore",
-          newValue: score,
-        },
-        $isLoggedIn
-      );
+      achievement.updatePartOfAchievement({
+        updatedValue: "highScore",
+        newValue: score,
+      });
     }
   }
 
   function longestLengthChecker(length: number) {
     if (length >= $achievement.longestLength) {
-      achievement.updatePartOfAchievement(
-        {
-          updatedValue: "longestLength",
-          newValue: length,
-        },
-        $isLoggedIn
-      );
+      achievement.updatePartOfAchievement({
+        updatedValue: "longestLength",
+        newValue: length,
+      });
     }
   }
 </script>

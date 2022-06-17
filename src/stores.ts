@@ -42,18 +42,13 @@ function createSavedGame () {
                 ...previousSavedGame,
                 ...overriderObject
             }
-            if (!isLoggedIn) {
-                localStorage.setItem("savedGame", JSON.stringify(newObject));
-            }
+            localStorage.setItem("savedGame", JSON.stringify(newObject));
             return newObject;
         })
     }
-    async function reset (isLoggedIn : boolean) {
+    async function reset () {
         const newSavedGame = createNewSavedGame();
-        if (!isLoggedIn) {
-            localStorage.removeItem("savedGame");
-        } else {
-        }
+        localStorage.removeItem("savedGame");
         set(newSavedGame);
     }
 
@@ -89,16 +84,14 @@ function createAchievement () {
         } as IAchievementInfo
     }
 
-    function updatePartOfAchievement (payload : UpdateAchievementPayload, isLoggedIn : boolean) {
+    function updatePartOfAchievement (payload : UpdateAchievementPayload) {
         update (previousSavedGame => {
             const overriderObject = {[payload.updatedValue] : payload.newValue};
             const newObject = {
                 ...previousSavedGame,
                 ...overriderObject
             }
-            if (!isLoggedIn) {
-                localStorage.setItem("achievement", JSON.stringify(newObject));
-            }
+            localStorage.setItem("achievement", JSON.stringify(newObject));
             return newObject;
         })
     }
@@ -135,12 +128,10 @@ function createBindings () {
         return (candidateBindings ?? defaultBinding) as IBindingsInfo
     }
 
-    function changeFirstElementPartOfBindings (newKey : string, changedDirection : Direction, isLoggedIn : boolean) {
+    function changeFirstElementPartOfBindings (newKey : string, changedDirection : Direction) {
         update (previousBinding => {
             const newBinding =  updateBindingFirstElement(newKey, changedDirection, previousBinding); 
-            if (!isLoggedIn) {
-                localStorage.setItem("bindings", JSON.stringify(newBinding));
-            }
+            localStorage.setItem("bindings", JSON.stringify(newBinding));
             return newBinding;
         })
     }

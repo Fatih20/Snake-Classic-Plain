@@ -61,10 +61,6 @@
 
   let nthTurnReference = 0;
 
-  let isSaving = false;
-  let attemptToSaveCompleted = true;
-  let errorWhenSaving = false;
-
   function sendResetGame() {
     dispatch("resetGame");
   }

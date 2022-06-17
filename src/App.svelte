@@ -45,7 +45,7 @@
   }
 
   async function resetCoreGame() {
-    await savedGame.reset($isLoggedIn);
+    await savedGame.reset();
     gameIsOver.set(false);
     gameIsPaused.set(false);
   }

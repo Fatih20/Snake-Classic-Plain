@@ -117,7 +117,6 @@
   .key-binding-container {
     align-items: center;
     padding-bottom: 0.5em;
-    border-bottom: solid 2px rgb(var(--text-on-primary-element-color));
     display: flex;
     flex-direction: column;
     gap: 0.25em;
@@ -125,10 +124,11 @@
   }
 
   .key-button-container {
-    display: grid;
     column-gap: 20px;
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    margin-bottom: 0.25em;
     row-gap: 10px;
     /* width: 100%; */
     /* border: solid 1px black; */

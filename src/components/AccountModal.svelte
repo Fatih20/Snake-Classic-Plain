@@ -1,11 +1,5 @@
 <script lang="ts">
-  import {
-    bindings,
-    deviceWidth,
-    gameState,
-    isLoggedIn,
-    modalOpen,
-  } from "../stores";
+  import { bindings, deviceWidth, gameState, modalOpen } from "../stores";
 
   import type {
     Direction,

@@ -3,7 +3,6 @@
   import {
     gameIsPaused,
     gameIsOver,
-    isLoggedIn,
     gameState,
     modalOpen,
     initialBindingModalJustOpened,

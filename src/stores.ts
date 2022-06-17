@@ -35,7 +35,7 @@ function createSavedGame () {
         } as ISavedGameInfo
     }
 
-    function updatePartOfSavedGame (payload : UpdateSavedGamePayload, isLoggedIn : boolean) {
+    function updatePartOfSavedGame (payload : UpdateSavedGamePayload) {
         update (previousSavedGame => {
             const overriderObject = {[payload.updatedValue] : payload.newValue};
             const newObject = {
@@ -165,7 +165,6 @@ export const achievement = createAchievement();
 
 export const firstStart = writable(fetchItemFromLocalStorage("savedGame") === undefined);
 export const gameState = writable("startPage" as possibleGameStateType);
-export const isLoggedIn = writable(false);
 export const gameIsPaused = writable(fetchItemFromLocalStorage("savedGame") !== undefined);
 export const gameIsOver = writable(false);
 export const modalOpen = writable(false);

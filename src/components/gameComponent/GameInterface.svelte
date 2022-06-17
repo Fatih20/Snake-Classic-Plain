@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { achievement, isLoggedIn, savedGame } from "../../stores";
+  import { achievement, savedGame } from "../../stores";
 
   let length = $savedGame.wholeSnakeCoordinateList?.length ?? 0;
   $: length = $savedGame.wholeSnakeCoordinateList?.length ?? 0;

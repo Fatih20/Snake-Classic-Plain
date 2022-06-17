@@ -9,7 +9,6 @@
     savedGame,
     gameState,
     gameIsPaused,
-    isLoggedIn,
     achievement,
     modalOpen,
     initialBindingModalJustOpened,
